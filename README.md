@@ -1,7 +1,7 @@
 # TicTacToe
 
 
-(I have no idea why the readme looks like this in preview, please view in .txt format for best results)
+(I have no idea why the readme looks like this in preview, please view in raw format for best results)
 
 This game runs in the terminal.
 
