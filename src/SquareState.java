@@ -1,0 +1,1 @@
+public enum SquareState {EMPTY, X, O}
