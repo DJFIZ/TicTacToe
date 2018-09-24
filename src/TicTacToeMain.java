@@ -1,5 +1,4 @@
 //TicTacToeMain.java
-//
 import javax.swing.*;
 
 public class TicTacToeMain {
@@ -9,6 +8,7 @@ public class TicTacToeMain {
         newGame.promptPlayer();
     }
 
+    //prompts the player on whether they wish to play as X or O
     private void promptPlayer() {
         Board board;
         Object[] options = {"X", "O"};
