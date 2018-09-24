@@ -1,5 +1,8 @@
 # TicTacToe
 
+
+(I have no idea why the readme looks like this in preview, please view in .txt format for best results)
+
 This game runs in the terminal.
 
 To play, simply select whether you want to be "X" or "O" when prompted. 
