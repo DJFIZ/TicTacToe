@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 class Board {
 
-    public enum GameState { PLAYING, DRAW, PLAYER_WON, COMP_WON } //various symbols to indicate what is happening in the game
+    public enum GameState {PLAYING, DRAW, PLAYER_WON, COMP_WON} //various symbols to indicate what is happening in the game
 
     private static Scanner scanner = new Scanner(System.in); //scanner initialized to take input from user
 
     //dimensions of the board
     static final int ROWS = 3,
-                     COLS = 3;
+            COLS = 3;
 
     SquareState playerSymbol; //symbol chosen by the player
     private GameState gameState; //state of the game
@@ -21,17 +21,16 @@ class Board {
 
     //variables used to check whether the game has been decided at these coords
     private int currentRow,
-                currentCol;
+            currentCol;
 
     //constructor takes a string and determines what symbol the player chose
     //it then sets the AI player to have the opposite symbol
     Board(String str) {
         gameState = GameState.PLAYING;
-        if(str.equals("X")){
+        if (str.equals("X")) {
             playerSymbol = SquareState.X;
             arty = new AIOpponent(SquareState.O, this);
-        }
-        else{
+        } else {
             playerSymbol = SquareState.O;
             arty = new AIOpponent(SquareState.X, this);
         }
@@ -53,8 +52,8 @@ class Board {
     //play manages much of the game
     //while an ending condition has not been met, the user player and AI player alternate taking turns
     //following each player's turn, updateGameState is called to check if the gameState needs to be changed
-    private void play(){
-        while(gameState == GameState.PLAYING) {
+    private void play() {
+        while (gameState == GameState.PLAYING) {
             //Since X goes first, game checks to see what symbol each player is
             if (playerSymbol == SquareState.X) { //this chunk occurs only when player goes first
                 playerMove();
@@ -89,7 +88,7 @@ class Board {
      */
     private void playerMove() {
         boolean validInput = false;
-        while(!validInput) {
+        while (!validInput) {
             System.out.print("\nEnter your move (row# column#): ");
             //scanner checks to ensure that only integers are entered
             if (scanner.hasNextInt()) {
@@ -121,7 +120,7 @@ class Board {
     }
 
     //calls the AI player to move, getting its best move
-    private void compMove(){
+    private void compMove() {
         System.out.println("\nComputer's turn...\n");
         int[] bestMove = arty.getBestMove();
         setSquare(bestMove[0], bestMove[1], arty.compSymbol);
@@ -129,7 +128,7 @@ class Board {
 
 
     //sets the square to hold the given symbol/state
-    private void setSquare(int r, int c, SquareState sS){
+    private void setSquare(int r, int c, SquareState sS) {
         board[r][c].state = sS;
         currentRow = r;
         currentCol = c;
@@ -139,7 +138,7 @@ class Board {
     //checks to see if the most recent move has ended the game, displaying what the outcome is if it did
     private void updateGameState(SquareState sS) {
         if (checkWin(sS)) {
-            if(sS == playerSymbol) {
+            if (sS == playerSymbol) {
                 gameState = GameState.PLAYER_WON;
                 System.out.println("\nYou won!");
             } else {
@@ -169,23 +168,23 @@ class Board {
     boolean checkWin(SquareState sS) {
         boolean win = false;
         if (    //checks win at the current row
-                   board[currentRow][0].state == sS
-                && board[currentRow][1].state == sS
-                && board[currentRow][2].state == sS
-                //checks win at current column
-                || board[0][currentCol].state == sS
-                && board[1][currentCol].state == sS
-                && board[2][currentCol].state == sS
-                //checks win at diagonal 1
-                || currentRow == currentCol
-                && board[0][0].state == sS
-                && board[1][1].state == sS
-                && board[2][2].state == sS
-                //checks win at diagonal 2
-                || currentRow + currentCol == 2
-                && board[0][2].state == sS
-                && board[1][1].state == sS
-                && board[2][0].state == sS){
+                board[currentRow][0].state == sS
+                        && board[currentRow][1].state == sS
+                        && board[currentRow][2].state == sS
+                        //checks win at current column
+                        || board[0][currentCol].state == sS
+                        && board[1][currentCol].state == sS
+                        && board[2][currentCol].state == sS
+                        //checks win at diagonal 1
+                        || currentRow == currentCol
+                        && board[0][0].state == sS
+                        && board[1][1].state == sS
+                        && board[2][2].state == sS
+                        //checks win at diagonal 2
+                        || currentRow + currentCol == 2
+                        && board[0][2].state == sS
+                        && board[1][1].state == sS
+                        && board[2][0].state == sS) {
             win = true;
         }
         return win;

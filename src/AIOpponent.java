@@ -26,7 +26,7 @@ class AIOpponent {
     //calls the search algorithm and returns the coords of the best move
     int[] getBestMove() {
         int[] bestMove = miniMax(2, compSymbol, Integer.MIN_VALUE, Integer.MAX_VALUE);
-        return new int[] {bestMove[1], bestMove[2]};
+        return new int[]{bestMove[1], bestMove[2]};
     }
 
     //gets available spaces by finding all squares on the board with an empty state
@@ -42,7 +42,7 @@ class AIOpponent {
         for (int row = 0; row < Board.ROWS; ++row) {
             for (int col = 0; col < Board.COLS; ++col) {
                 if (board.board[row][col].state == SquareState.EMPTY) {
-                    possibleMoves.add(new int[] {row, col});
+                    possibleMoves.add(new int[]{row, col});
                 }
             }
         }
@@ -124,12 +124,12 @@ class AIOpponent {
 
         int score; //keeps track of the 'value' each move gives
         int bestRow = -1, //initializes variables for the best row/col
-            bestCol = -1;
+                bestCol = -1;
 
         //if there are no moves to make or intended depth has been reached, evaluates the best move and returns the coords
         if (nextMoves.isEmpty() || depth == 0) {
             score = evaluate();
-            return new int[] {score, bestRow, bestCol};
+            return new int[]{score, bestRow, bestCol};
         } else {
             for (int[] tmpMove : nextMoves) {//new temporary list of available moves
                 board.board[tmpMove[0]][tmpMove[1]].state = sS; //temporarily sets a square to sS for evaluation
@@ -151,12 +151,14 @@ class AIOpponent {
                     }
                 }
                 board.board[tmpMove[0]][tmpMove[1]].state = SquareState.EMPTY; //resets the temporary square to empty
-                if (alpha >= beta) { break; } //breaks loop if maximizing evaluates to a higher or same score as minimizing
+                if (alpha >= beta) {
+                    break;
+                } //breaks loop if maximizing evaluates to a higher or same score as minimizing
             }
-            if(sS == compSymbol)
-                return new int[] {alpha, bestRow, bestCol}; //returns best move for maximizing computer
+            if (sS == compSymbol)
+                return new int[]{alpha, bestRow, bestCol}; //returns best move for maximizing computer
             else
-                return new int[] {beta, bestRow, bestCol}; //returns best move for minimizing user
+                return new int[]{beta, bestRow, bestCol}; //returns best move for minimizing user
         }
     }
 }
