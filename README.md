@@ -1,5 +1,5 @@
 # TicTacToe
-HI OSU :)
+( Hi CS290 :) )
 
 This game runs in the terminal.
 
